@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nikhil Kurmi - CV</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+
+        .download-btn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #0066cc;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 500;
+            box-shadow: 0 2px 8px rgba(0, 102, 204, 0.3);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .download-btn:hover {
+            background-color: #0052a3;
+            box-shadow: 0 4px 12px rgba(0, 102, 204, 0.4);
+            transform: translateY(-2px);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .cv-wrapper {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            min-height: 100vh;
+        }
+
+        /* Left Sidebar */
+        .sidebar {
+            background-color: #0066cc;
+            color: white;
+            padding: 40px 30px;
+        }
+
+        .profile {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .profile-photo {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            margin: 0 auto 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .profile-photo div {
+            font-size: 56px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .profile h1 {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .profile .title {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            opacity: 0.95;
+        }
+
+        .profile .subtitle {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+
+        .sidebar-section {
+            margin-bottom: 35px;
+        }
+
+        .sidebar-section h2 {
+            font-size: 14px;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+            margin-bottom: 16px;
+        }
+
+        .contact-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+            font-size: 13px;
+        }
+
+        .contact-item-label {
+            font-weight: 500;
+            opacity: 0.9;
+            margin-bottom: 2px;
+        }
+
+        .contact-item-value {
+            opacity: 0.8;
+            word-break: break-word;
+        }
+
+        .skill-item {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            opacity: 0.9;
+        }
+
+        .skill-item span:first-child {
+            opacity: 0.7;
+        }
+
+        .language-item {
+            margin-bottom: 12px;
+        }
+
+        .language-name {
+            font-weight: 500;
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 2px;
+        }
+
+        .language-level {
+            font-size: 11px;
+            opacity: 0.75;
+        }
+
+        .tech-category {
+            margin-bottom: 12px;
+        }
+
+        .tech-category-title {
+            font-weight: 500;
+            font-size: 13px;
+            opacity: 0.9;
+            margin-bottom: 4px;
+        }
+
+        .tech-category-content {
+            font-size: 11px;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 60px 50px;
+        }
+
+        .content-section {
+            margin-bottom: 50px;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 24px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #0066cc;
+        }
+
+        .section-header h2 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .section-icon {
+            width: 24px;
+            height: 24px;
+            color: #0066cc;
+        }
+
+        /* Work Experience */
+        .experience-item {
+            margin-bottom: 28px;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            gap: 20px;
+        }
+
+        .experience-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 4px;
+        }
+
+        .experience-company {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 2px;
+        }
+
+        .experience-website {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .experience-date {
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            white-space: nowrap;
+        }
+
+        .experience-description {
+            list-style-position: inside;
+            margin-left: 4px;
+        }
+
+        .experience-description li {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 6px;
+            line-height: 1.5;
+        }
+
+        /* Education */
+        .education-item {
+            margin-bottom: 24px;
+        }
+
+        .education-header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            gap: 20px;
+        }
+
+        .education-degree {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0066cc;
+        }
+
+        .education-date {
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+        }
+
+        .education-school {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 4px;
+        }
+
+        .education-grade {
+            font-size: 13px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* Projects */
+        .project-item {
+            margin-bottom: 20px;
+        }
+
+        .project-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 4px;
+        }
+
+        .project-link {
+            font-size: 13px;
+            color: #999;
+            margin-bottom: 8px;
+        }
+
+        .project-link a {
+            color: #0066cc;
+            text-decoration: none;
+        }
+
+        .project-link a:hover {
+            text-decoration: underline;
+        }
+
+        .project-description {
+            list-style-position: inside;
+            margin-left: 4px;
+        }
+
+        .project-description li {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 4px;
+            line-height: 1.5;
+        }
+
+        /* Technical Skills */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .skill-category h3 {
+            font-size: 15px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 8px;
+        }
+
+        .skill-category p {
+            font-size: 14px;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        /* Awards */
+        .award-item {
+            margin-bottom: 20px;
+        }
+
+        .award-title {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 4px;
+        }
+
+        .award-org {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        /* References */
+        .reference-name {
+            font-size: 17px;
+            font-weight: 600;
+            color: #0066cc;
+            margin-bottom: 4px;
+        }
+
+        .reference-position {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+
+        .reference-contact {
+            font-size: 13px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .download-btn {
+                top: 10px;
+                right: 10px;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+
+            .cv-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .sidebar {
+                padding: 30px 20px;
+            }
+
+            .main-content {
+                padding: 30px 20px;
+            }
+
+            .section-header h2 {
+                font-size: 20px;
+            }
+
+            .experience-header,
+            .education-header {
+                flex-direction: column;
+                gap: 8px;
+            }
+
+            .experience-date,
+            .education-date {
+                white-space: normal;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            body {
+                background-color: white;
+            }
+
+            .download-btn {
+                display: none;
+            }
+
+            .container {
+                box-shadow: none;
+                max-width: 100%;
+            }
+
+            .cv-wrapper {
+                grid-template-columns: 280px 1fr;
+            }
+
+            .sidebar {
+                padding: 30px 20px;
+            }
+
+            .main-content {
+                padding: 30px 30px;
+            }
+
+            .content-section {
+                page-break-inside: avoid;
+                margin-bottom: 30px;
+            }
+
+            .experience-item,
+            .education-item,
+            .project-item {
+                page-break-inside: avoid;
+            }
+        }
+
+        @page {
+            size: A4;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <button class="download-btn" onclick="window.print()">📥 Download PDF</button>
+
+    <div class="container">
+        <div class="cv-wrapper">
+            <!-- Left Sidebar -->
+            <aside class="sidebar">
+                <!-- Profile Section -->
+                <div class="profile">
+                    <div class="profile-photo">
+                        <div>NK</div>
+                    </div>
+                    <h1>NIKHIL KURMI</h1>
+                    <p class="title">Computer Science Graduate</p>
+                    <p class="subtitle">Web Developer | IT Professional | Office Assistant</p>
+                </div>
+
+                <!-- Contact -->
+                <div class="sidebar-section">
+                    <h2>Contact</h2>
+                    <div class="contact-item">
+                        <div>
+                            <div class="contact-item-label">Phone</div>
+                            <div class="contact-item-value">+357 99941917</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div>
+                            <div class="contact-item-label">Email</div>
+                            <div class="contact-item-value">nikhilkurmi386@gmail.com</div>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div>
+                            <div class="contact-item-label">Address</div>
+                            <div class="contact-item-value">DNP Property Group, Koloni, Near Rikkos Beach, Yeroskipou-8200, Cyprus</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Key Skills -->
+                <div class="sidebar-section">
+                    <h2>Key Skills</h2>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Customer Service</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Team Collaboration</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Time Management</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Problem Solving</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Microsoft Office Suite</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Data Entry & Management</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Fast Learner</span>
+                    </div>
+                </div>
+
+                <!-- Languages -->
+                <div class="sidebar-section">
+                    <h2>Languages</h2>
+                    <div class="language-item">
+                        <div class="language-name">English</div>
+                        <div class="language-level">Professional Working Proficiency</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Bengali</div>
+                        <div class="language-level">Native</div>
+                    </div>
+                    <div class="language-item">
+                        <div class="language-name">Hindi</div>
+                        <div class="language-level">Professional Working Proficiency</div>
+                    </div>
+                </div>
+
+                <!-- Technical Skills -->
+                <div class="sidebar-section">
+                    <h2>Technical Skills</h2>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Programming</div>
+                        <div class="tech-category-content">C, C++, PHP, JavaScript, SQL, HTML/CSS</div>
+                    </div>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Frameworks</div>
+                        <div class="tech-category-content">Laravel, Nuxt JS, Bootstrap</div>
+                    </div>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Tools</div>
+                        <div class="tech-category-content">Git, MS Office, Cisco Packet Tracer</div>
+                    </div>
+                    <div class="tech-category">
+                        <div class="tech-category-title">Operating Systems</div>
+                        <div class="tech-category-content">Windows, Linux, macOS, Ubuntu</div>
+                    </div>
+                </div>
+
+                <!-- Work Status -->
+                <div class="sidebar-section">
+                    <h2>Work Status</h2>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>International Student</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Part-time/Full-time Available</span>
+                    </div>
+                    <div class="skill-item">
+                        <span>•</span>
+                        <span>Flexible Schedule</span>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="main-content">
+                <!-- Work Experience -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        </svg>
+                        <h2>WORK EXPERIENCE</h2>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Web Developer</div>
+                                <div class="experience-company">Staff-India</div>
+                                <div class="experience-website">www.staff-india.com</div>
+                            </div>
+                            <div class="experience-date">Feb 2023 - Oct 2025</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Develop and maintain dynamic web applications</li>
+                            <li>Collaborated with clients to gather requirements and provide technical support</li>
+                            <li>Optimized legacy systems for better performance and scalability</li>
+                            <li>Implement REST API and real-time features in client web platforms</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Web Application Developer & IT Project Coordinator</div>
+                                <div class="experience-company">Webermelon</div>
+                                <div class="experience-website">www.webermelon.com</div>
+                            </div>
+                            <div class="experience-date">May 2020 - Jan 2023</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Led development projects from planning to deployment</li>
+                            <li>Coordinated between clients, developers, and designers</li>
+                            <li>Delivered timely, high-quality solutions aligned with business goals</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Web Application Developer (Remote)</div>
+                                <div class="experience-company">UCAP Canada</div>
+                                <div class="experience-website">www.ucapworld.com</div>
+                            </div>
+                            <div class="experience-date">Jan 2020 - Dec 2020</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Built and customized education-focused web portals</li>
+                            <li>Implemented user management and reporting features</li>
+                            <li>Worked remotely with cross-functional teams for updates and troubleshooting</li>
+                        </ul>
+                    </div>
+
+                    <div class="experience-item">
+                        <div class="experience-header">
+                            <div>
+                                <div class="experience-title">Web Developer & Head of Operation</div>
+                                <div class="experience-company">Savasaachi (Sister Company - Veechi Technologies)</div>
+                                <div class="experience-website">www.savasaachi.com</div>
+                            </div>
+                            <div class="experience-date">Nov 2019 - Apr 2020</div>
+                        </div>
+                        <ul class="experience-description">
+                            <li>Managed end-to-end development of corporate websites and e-commerce platforms</li>
+                            <li>Oversaw daily operations and team productivity</li>
+                            <li>Devised and enforced coding standards, project timelines, and QA processes</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Education -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 14l9-5-9-5-9 5 9 5z" />
+                            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222" />
+                        </svg>
+                        <h2>EDUCATION</h2>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div class="education-degree">Bachelor of Science in Computer Science & Engineering</div>
+                            <div class="education-date">2015 - 2018</div>
+                        </div>
+                        <div class="education-school">Leading University, Sylhet-3100, Bangladesh</div>
+                        <div class="education-grade">CGPA: 3.19 out of 4.00</div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div class="education-degree">Higher Secondary School Certificate</div>
+                            <div class="education-date">2013 - 2014</div>
+                        </div>
+                        <div class="education-school">Moulvibazar Govt. College, Moulvibazar, Bangladesh</div>
+                        <div class="education-grade">GPA: 4.00 out of 5.00</div>
+                    </div>
+
+                    <div class="education-item">
+                        <div class="education-header">
+                            <div class="education-degree">Secondary School Certificate</div>
+                            <div class="education-date">2011 - 2012</div>
+                        </div>
+                        <div class="education-school">Kali Prashad High School, Munshibazar-3224, Bangladesh</div>
+                        <div class="education-grade">GPA: 4.88 out of 5.00</div>
+                    </div>
+                </section>
+
+                <!-- Projects -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z" />
+                        </svg>
+                        <h2>PROJECTS</h2>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-title">Office Management CRM (Web Based)</div>
+                        <div class="project-link">
+                            Source Code: <a href="https://github.com/nikhil.lu210/BlueOrange" target="_blank">github.com/nikhil.lu210/BlueOrange</a>
+                        </div>
+                        <ul class="project-description">
+                            <li>Well maintained attendance management</li>
+                            <li>Employee Salary Management</li>
+                            <li>Task management and daily work update</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-title">Transportation Management System (Web Based)</div>
+                        <div class="project-link">
+                            Source Code: <a href="https://gitlab.com/nikhil.lu210/tManagement" target="_blank">gitlab.com/nikhil.lu210/tManagement</a>
+                        </div>
+                        <ul class="project-description">
+                            <li>Well maintained transport and class schedule</li>
+                            <li>Proper calculations of the number of goers for each route</li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <div class="project-title">ITMGF (Web Project)</div>
+                        <div class="project-link">
+                            Source Code: <a href="https://gitlab.com/nikhil.lu210/project_itmgf" target="_blank">gitlab.com/nikhil.lu210/project_itmgf</a>
+                        </div>
+                        <ul class="project-description">
+                            <li>Register Team with fees and needed documents</li>
+                            <li>Create individual matches or tournaments with several teams</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Technical Skills -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                        </svg>
+                        <h2>TECHNICAL SKILLS</h2>
+                    </div>
+
+                    <div class="skills-grid">
+                        <div class="skill-category">
+                            <h3>Web Development</h3>
+                            <p>HTML, CSS, SCSS, JavaScript, Git, Web Server</p>
+                        </div>
+                        <div class="skill-category">
+                            <h3>Networking</h3>
+                            <p>IP Subnetting, Optical Fiber, Routing, DNS, OSI, Port Forwarding</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Awards & Activities -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                        </svg>
+                        <h2>AWARDS & ACTIVITIES</h2>
+                    </div>
+
+                    <div class="award-item">
+                        <div class="award-title">Hackathon Winner</div>
+                        <div class="award-org">SJ Innovation (www.sjinnovation.com) - 2019</div>
+                    </div>
+
+                    <div class="award-item">
+                        <div class="award-title">Student Ambassador</div>
+                        <div class="award-org">Mozilla<br>www.support.mozilla.org/en-US/user/nikhil.lu210</div>
+                    </div>
+
+                    <div class="award-item">
+                        <div class="award-title">Marketing Deputy</div>
+                        <div class="award-org">Leading University Mozilla Club<br>www.wiki.mozilla.org/LU_FirefoxClub</div>
+                    </div>
+
+                    <div class="award-item">
+                        <div class="award-title">Senior Executive</div>
+                        <div class="award-org">Leading University Computer Club (LUCC)</div>
+                    </div>
+                </section>
+
+                <!-- References -->
+                <section class="content-section">
+                    <div class="section-header">
+                        <svg class="section-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                        </svg>
+                        <h2>REFERENCES</h2>
+                    </div>
+
+                    <div>
+                        <div class="reference-name">Md. Asaduzzaman Khan</div>
+                        <div class="reference-position">Former Head & Assistant Professor of Dept. of CSE at Leading University<br>Head & Associate Professor of Dept. of CSE at BAIUST</div>
+                        <div class="reference-contact">
+                            Email: mak@baiust.edu.bd<br>
+                            Mobile: +880 1711 003233
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+</body>
+</html>
