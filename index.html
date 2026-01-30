@@ -3,278 +3,431 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nikhil Kurmi | Web Developer & Project Coordinator</title>
+    <title>Nikhil Kurmi | Portfolio</title>
+    <meta name="description" content="Portfolio of Nikhil Kurmi - IT Project Coordinator & Web Developer.">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="1000031260.png">
+
+    <!-- Google Fonts: Roboto & Playfair Display (for creative fallback) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Roboto:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://unpkg.com/lucide@latest"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        .gradient-text {
-            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- Tailwind Config -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                        creative: ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        black: '#000000',
+                        white: '#ffffff',
+                        offWhite: '#fafafa',
+                        charcoal: '#121212',
+                    }
+                }
+            }
         }
-        .skill-card:hover { transform: translateY(-5px); transition: all 0.3s ease; }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #000000;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #fff; }
+        ::-webkit-scrollbar-thumb { background: #000; border-radius: 4px; }
+
+        /* Animation Classes */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-in-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* SVG Hover Effects */
+        .illustration-svg path {
+            transition: fill 0.3s ease, stroke 0.3s ease;
+        }
+        .illustration-hover:hover .illustration-svg path {
+            fill: #333;
+        }
+
+        /* Form Focus */
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #000;
+            box-shadow: 0 0 0 1px #000;
+        }
+
+        /* Logo Fallback Logic */
+        .logo-text { display: none; }
+        .logo-img.error { display: none; }
+        .logo-img.error + .logo-text { display: block; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="antialiased">
 
     <!-- Navigation -->
-    <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
-        <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-            <span class="text-xl font-bold tracking-tighter text-blue-600">NK.</span>
-            <div class="hidden md:flex space-x-8 text-sm font-medium">
-                <a href="#about" class="hover:text-blue-600 transition">About</a>
-                <a href="#experience" class="hover:text-blue-600 transition">Experience</a>
-                <a href="#skills" class="hover:text-blue-600 transition">Skills</a>
-                <a href="#contact" class="px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition">Contact Me</a>
+    <nav class="fixed w-full bg-white/95 backdrop-blur-md z-50 border-b border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo Area -->
+                <div class="flex-shrink-0 flex items-center gap-3">
+                    <img class="h-12 w-auto logo-img" src="1000031260.png" onerror="this.classList.add('error')" alt="Logo">
+                    <span class="logo-text font-creative text-3xl font-bold tracking-wide italic">Nikhil</span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <a href="#about" class="text-sm font-bold uppercase tracking-widest hover:text-gray-500 transition">About</a>
+                    <a href="#experience" class="text-sm font-bold uppercase tracking-widest hover:text-gray-500 transition">Experience</a>
+                    <a href="#skills" class="text-sm font-bold uppercase tracking-widest hover:text-gray-500 transition">Skills</a>
+                    <a href="#contact" class="bg-black text-white px-6 py-2 text-sm font-bold uppercase tracking-widest hover:bg-gray-800 transition">Contact</a>
+                </div>
+
+                <!-- Mobile Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-2xl focus:outline-none"><i class="fas fa-bars"></i></button>
+                </div>
+            </div>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-gray-100 absolute w-full">
+            <div class="px-4 py-4 space-y-3">
+                <a href="#about" class="block text-lg font-medium">About</a>
+                <a href="#experience" class="block text-lg font-medium">Experience</a>
+                <a href="#skills" class="block text-lg font-medium">Skills</a>
+                <a href="#contact" class="block text-lg font-medium">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6">
-        <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-            <div>
-                <span class="inline-block px-3 py-1 text-xs font-semibold tracking-wider text-blue-600 uppercase bg-blue-50 rounded-full mb-4">Available for opportunities</span>
-                <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
-                    Hi, I'm <span class="gradient-text">Nikhil Kurmi</span>
+    <section class="min-h-screen flex items-center pt-20 overflow-hidden relative">
+        <div class="absolute right-0 top-20 w-1/3 h-full bg-gray-50 -z-10 skew-x-12 hidden lg:block"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <!-- Text Content -->
+            <div class="fade-in-up order-2 lg:order-1">
+                <div class="inline-block bg-black text-white px-3 py-1 text-xs font-bold uppercase tracking-wider mb-6">
+                    Based in Paphos, Cyprus
+                </div>
+                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
+                    Technical <br>
+                    <span class="text-gray-400">Precision.</span>
                 </h1>
-                <p class="text-lg text-slate-600 mb-8 leading-relaxed">
-                    A seasoned Web Developer and IT Project Coordinator passionate about building scalable digital solutions. Currently pursuing an MSc in Information Systems & Digital Innovation in Cyprus.
+                <p class="text-xl text-gray-600 mb-8 font-light max-w-lg leading-relaxed">
+                    I am Nikhil Kurmi. I bridge the gap between complex code and business goals. IT Project Coordinator & Developer.
                 </p>
-                <div class="flex space-x-4">
-                    <a href="#experience" class="px-6 py-3 bg-slate-900 text-white rounded-lg font-medium hover:bg-slate-800 transition shadow-lg">View My Work</a>
-                    <a href="mailto:nikhilkurmi386@gmail.com" class="px-6 py-3 border border-slate-200 rounded-lg font-medium hover:bg-slate-50 transition">Get in Touch</a>
+                <div class="flex gap-4">
+                    <a href="#contact" class="border-2 border-black px-8 py-3 font-bold uppercase text-sm tracking-widest hover:bg-black hover:text-white transition duration-300">
+                        Hire Me
+                    </a>
+                    <a href="https://www.linkedin.com/in/nkurmi" target="_blank" class="text-3xl hover:text-gray-600 transition self-center">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="https://github.com/nkurmi-cp" target="_blank" class="text-3xl hover:text-gray-600 transition self-center">
+                        <i class="fab fa-github"></i>
+                    </a>
                 </div>
             </div>
-            <div class="relative flex justify-center">
-                <!-- Illustration Placeholder using SVG -->
-                <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full max-w-sm">
-                    <path fill="#DBEafe" d="M44.7,-76.4C58.1,-69.2,69.2,-58.1,76.4,-44.7C83.6,-31.3,86.9,-15.6,85.1,-0.9C83.4,13.7,76.6,27.5,68.4,40.4C60.2,53.2,50.6,65.2,38.2,72.6C25.8,80,10.6,82.8,-4.2,89.1C-19.1,95.4,-33.6,105.1,-46.3,101.4C-59.1,97.7,-70.1,80.5,-77.4,63.9C-84.7,47.3,-88.3,31.3,-89.7,15.6C-91.1,0,-90.4,-15.4,-84.9,-29.4C-79.5,-43.3,-69.4,-55.8,-57,-63.4C-44.6,-71,-29.9,-73.7,-15.5,-75.4C-1,-77,13.5,-77.7,28.2,-78.2C42.9,-78.7,44.7,-76.4,44.7,-76.4Z" transform="translate(100 100)" />
-                    <circle cx="100" cy="100" r="60" fill="white" class="shadow-sm"/>
-                    <text x="65" y="115" font-family="Arial" font-size="40">👨‍💻</text>
+
+            <!-- Hero Illustration -->
+            <div class="fade-in-up order-1 lg:order-2 flex justify-center illustration-hover">
+                <!-- Custom SVG Illustration: Developer Desk -->
+                <svg width="100%" height="auto" viewBox="0 0 500 400" fill="none" xmlns="http://www.w3.org/2000/svg" class="max-w-md illustration-svg">
+                    <!-- Monitor -->
+                    <rect x="50" y="50" width="300" height="200" rx="10" stroke="black" stroke-width="4" fill="white"/>
+                    <rect x="70" y="70" width="260" height="160" fill="#f3f4f6"/>
+                    <!-- Code Lines -->
+                    <rect x="90" y="90" width="100" height="10" rx="5" fill="black"/>
+                    <rect x="90" y="110" width="160" height="10" rx="5" fill="#d1d5db"/>
+                    <rect x="90" y="130" width="140" height="10" rx="5" fill="#d1d5db"/>
+                    <rect x="90" y="150" width="80" height="10" rx="5" fill="black"/>
+                    <!-- Stand -->
+                    <path d="M180 250 L180 280 L140 300 L260 300 L220 280 L220 250" stroke="black" stroke-width="4" fill="white"/>
+                    <!-- Character (Abstract) -->
+                    <circle cx="350" cy="280" r="50" stroke="black" stroke-width="4" fill="white"/>
+                    <path d="M350 330 C300 330 280 400 280 400 L420 400 C420 400 400 330 350 330" stroke="black" stroke-width="4" fill="black"/>
+                    <!-- Abstract Elements -->
+                    <circle cx="400" cy="100" r="20" stroke="black" stroke-width="2" stroke-dasharray="4 4"/>
+                    <rect x="420" y="150" width="40" height="40" stroke="black" stroke-width="2" transform="rotate(15 440 170)"/>
                 </svg>
             </div>
         </div>
     </section>
 
-    <!-- Quick Info -->
-    <section id="about" class="py-12 bg-white border-y border-slate-100">
-        <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8">
-            <div class="text-center">
-                <p class="text-2xl font-bold text-slate-900">5+</p>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Years Experience</p>
-            </div>
-            <div class="text-center">
-                <p class="text-2xl font-bold text-slate-900">MSc</p>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Current Education</p>
-            </div>
-            <div class="text-center">
-                <p class="text-2xl font-bold text-slate-900">10+</p>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Tech Stacks</p>
-            </div>
-            <div class="text-center">
-                <p class="text-2xl font-bold text-slate-900">1</p>
-                <p class="text-xs text-slate-500 uppercase font-semibold">Hackathon Win</p>
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center fade-in-up">
+                <div class="hidden md:block">
+                     <!-- Custom SVG Illustration: Analytics/Growth -->
+                     <svg width="100%" height="auto" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="50" y="350" width="50" height="0" fill="black">
+                            <animate attributeName="height" from="0" to="100" dur="1s" fill="freeze" />
+                            <animate attributeName="y" from="350" to="250" dur="1s" fill="freeze" />
+                        </rect>
+                        <rect x="120" y="350" width="50" height="0" fill="#d1d5db">
+                            <animate attributeName="height" from="0" to="180" dur="1.2s" fill="freeze" />
+                            <animate attributeName="y" from="350" to="170" dur="1.2s" fill="freeze" />
+                        </rect>
+                        <rect x="190" y="350" width="50" height="0" fill="black">
+                            <animate attributeName="height" from="0" to="240" dur="1.4s" fill="freeze" />
+                            <animate attributeName="y" from="350" to="110" dur="1.4s" fill="freeze" />
+                        </rect>
+                        <line x1="40" y1="350" x2="350" y2="350" stroke="black" stroke-width="4"/>
+                        <circle cx="320" cy="80" r="40" stroke="black" stroke-width="2" />
+                        <path d="M320 60 L320 80 L335 90" stroke="black" stroke-width="2"/>
+                    </svg>
+                </div>
+                <div>
+                    <h2 class="text-4xl font-black mb-8">ABOUT ME</h2>
+                    <p class="text-lg text-gray-700 mb-6 font-light">
+                        I am an IT Project Coordinator and Technical Support Specialist with over 5 years of experience. I don't just write code; I manage the lifecycle of web applications from the first requirement to the final deployment.
+                    </p>
+                    <p class="text-lg text-gray-700 mb-8 font-light">
+                        Currently pursuing an MSc in Information Systems at Neapolis University, Paphos. I excel at translating business needs into technical tasks, reducing miscommunication, and ensuring reliable delivery.
+                    </p>
+                    
+                    <div class="bg-gray-50 border-l-4 border-black p-6">
+                        <h3 class="font-bold uppercase tracking-wide mb-4">Education</h3>
+                        <div class="mb-4">
+                            <p class="font-bold">MSc, Information Systems & Digital Innovation</p>
+                            <p class="text-sm text-gray-500">Neapolis University, Cyprus (2025-2027)</p>
+                        </div>
+                        <div>
+                            <p class="font-bold">BSc, Computer Science & Engineering</p>
+                            <p class="text-sm text-gray-500">Leading University, Bangladesh (2015-2018)</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Experience Section -->
-    <section id="experience" class="py-20 px-6">
-        <div class="max-w-4xl mx-auto">
-            <div class="flex items-center space-x-4 mb-12">
-                <h2 class="text-3xl font-bold">Experience</h2>
-                <div class="h-px bg-slate-200 flex-1"></div>
-            </div>
-
-            <div class="space-y-12">
+    <!-- Experience Timeline -->
+    <section id="experience" class="py-24 bg-gray-50">
+        <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-black mb-16 text-center">EXPERIENCE</h2>
+            
+            <div class="space-y-8 fade-in-up">
                 <!-- Job 1 -->
-                <div class="relative pl-8 border-l-2 border-blue-500">
-                    <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-blue-500 border-4 border-white"></div>
-                    <div class="flex flex-wrap justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-900">Web Developer (IT Executive)</h3>
-                        <span class="text-sm font-medium bg-blue-50 text-blue-600 px-3 py-1 rounded-full">2023 — 2025</span>
+                <div class="bg-white p-8 border-b-4 border-black shadow-sm hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-2xl font-bold">IT Executive (Project Coordinator)</h3>
+                        <span class="font-mono text-gray-500">Staff-India | 2023 - 2025</span>
                     </div>
-                    <p class="text-blue-600 font-medium mb-3">Staff-India</p>
-                    <ul class="text-slate-600 space-y-2 text-sm">
-                        <li>• Developing and maintaining dynamic web applications for global clients.</li>
-                        <li>• Optimizing legacy systems for performance and scalability.</li>
-                        <li>• Implementing REST APIs and real-time features.</li>
-                    </ul>
+                    <p class="text-gray-600 mb-4">
+                        Coordinated 12+ web apps, bridging clients and dev teams. Managed 45+ deployments and optimized backend performance.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-black text-white text-xs font-bold uppercase">Project Management</span>
+                        <span class="px-3 py-1 bg-gray-200 text-black text-xs font-bold uppercase">Deployment</span>
+                    </div>
                 </div>
 
                 <!-- Job 2 -->
-                <div class="relative pl-8 border-l-2 border-slate-200">
-                    <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-slate-200 border-4 border-white"></div>
-                    <div class="flex flex-wrap justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-900">Web App Developer & Project Coordinator</h3>
-                        <span class="text-sm font-medium bg-slate-100 text-slate-500 px-3 py-1 rounded-full">2020 — 2022</span>
+                <div class="bg-white p-8 border-b-4 border-gray-300 shadow-sm hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Customer Support Representative</h3>
+                        <span class="font-mono text-gray-500">Amber IT | 2022 - 2023</span>
                     </div>
-                    <p class="text-blue-600 font-medium mb-3">Webermelon</p>
-                    <p class="text-slate-600 text-sm">Led development projects from planning to deployment. Coordinated between clients and designers to deliver high-quality IT solutions.</p>
+                    <p class="text-gray-600 mb-4">
+                        Handled 100+ daily tickets with a 5-minute response time. Recognized as Top Performer for crisis management.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-gray-200 text-black text-xs font-bold uppercase">Support</span>
+                        <span class="px-3 py-1 bg-gray-200 text-black text-xs font-bold uppercase">Troubleshooting</span>
+                    </div>
                 </div>
 
                 <!-- Job 3 -->
-                <div class="relative pl-8 border-l-2 border-slate-200">
-                    <div class="absolute -left-2 top-0 w-4 h-4 rounded-full bg-slate-200 border-4 border-white"></div>
-                    <div class="flex flex-wrap justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-900">Web App Developer (Remote)</h3>
-                        <span class="text-sm font-medium bg-slate-100 text-slate-500 px-3 py-1 rounded-full">2020</span>
+                <div class="bg-white p-8 border-b-4 border-gray-300 shadow-sm hover:shadow-xl transition-shadow duration-300">
+                    <div class="flex flex-col md:flex-row justify-between mb-4">
+                        <h3 class="text-2xl font-bold">Web Developer & Coordinator</h3>
+                        <span class="font-mono text-gray-500">Webermelon | 2020 - 2022</span>
                     </div>
-                    <p class="text-blue-600 font-medium mb-3">UCAP Canada</p>
-                    <p class="text-slate-600 text-sm">Built education-focused web portals with sophisticated user management and reporting features.</p>
+                    <p class="text-gray-600 mb-4">
+                        Managed client accounts and coordinated e-commerce projects. Improved team velocity by 25% through agile practices.
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="py-20 px-6 bg-slate-900 text-white rounded-3xl mx-4 my-10 shadow-2xl overflow-hidden relative">
-        <!-- Decoration -->
-        <div class="absolute top-0 right-0 p-12 opacity-10">
-            <i data-lucide="layers" class="w-64 h-64"></i>
-        </div>
-        
-        <div class="max-w-6xl mx-auto relative z-10">
-            <h2 class="text-3xl font-bold mb-12 text-center">Technical Toolkit</h2>
-            
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Development -->
-                <div class="bg-white/5 p-8 rounded-2xl border border-white/10">
-                    <div class="mb-6 flex items-center space-x-3">
-                        <div class="p-2 bg-blue-500/20 rounded-lg text-blue-400">
-                            <i data-lucide="code-2"></i>
-                        </div>
-                        <h3 class="text-lg font-bold">Development</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">HTML5/CSS3</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">JavaScript (ES6+)</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">PHP</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Laravel</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Nuxt.js</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Tailwind CSS</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">jQuery</span>
-                    </div>
-                </div>
-
-                <!-- Systems & Tools -->
-                <div class="bg-white/5 p-8 rounded-2xl border border-white/10">
-                    <div class="mb-6 flex items-center space-x-3">
-                        <div class="p-2 bg-emerald-500/20 rounded-lg text-emerald-400">
-                            <i data-lucide="database"></i>
-                        </div>
-                        <h3 class="text-lg font-bold">Backend & Ops</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">MySQL</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">REST APIs</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Git</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">DNS/Routing</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Networking</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">IP Subnetting</span>
-                    </div>
-                </div>
-
-                <!-- Professional -->
-                <div class="bg-white/5 p-8 rounded-2xl border border-white/10">
-                    <div class="mb-6 flex items-center space-x-3">
-                        <div class="p-2 bg-amber-500/20 rounded-lg text-amber-400">
-                            <i data-lucide="briefcase"></i>
-                        </div>
-                        <h3 class="text-lg font-bold">Management</h3>
-                    </div>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Project Management</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Customer Support</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">System Analysis</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Team Collaboration</span>
-                        <span class="px-3 py-1 bg-white/10 rounded-md text-xs">Time Management</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section class="py-20 px-6">
-        <div class="max-w-4xl mx-auto">
-            <h2 class="text-3xl font-bold mb-12 text-center">Education</h2>
-            <div class="grid md:grid-cols-2 gap-6">
-                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition">
-                    <p class="text-blue-600 font-bold mb-2">2025 — Present</p>
-                    <h4 class="font-bold text-lg mb-1">MSc in Information Systems & Digital Innovation</h4>
-                    <p class="text-slate-500 text-sm">Neapolis University, Pafos, Cyprus</p>
-                </div>
-                <div class="p-6 bg-white border border-slate-100 rounded-2xl shadow-sm hover:shadow-md transition">
-                    <p class="text-blue-600 font-bold mb-2">2015 — 2018</p>
-                    <h4 class="font-bold text-lg mb-1">BSc in Computer Science & Engineering</h4>
-                    <p class="text-slate-500 text-sm">Leading University, Sylhet, Bangladesh</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact & Footer -->
-    <footer id="contact" class="bg-slate-50 pt-20 pb-10 px-6 border-t border-slate-200">
-        <div class="max-w-6xl mx-auto">
-            <div class="grid md:grid-cols-2 gap-12 mb-16">
-                <div>
-                    <h2 class="text-3xl font-bold mb-6">Let's connect</h2>
-                    <p class="text-slate-600 mb-8">Currently based in Yeroskipou, Cyprus. I'm always open to discussing new projects, creative ideas or opportunities to be part of your visions.</p>
-                    <div class="space-y-4">
-                        <a href="mailto:nikhilkurmi386@gmail.com" class="flex items-center space-x-3 text-slate-700 hover:text-blue-600 transition">
-                            <i data-lucide="mail" class="w-5 h-5"></i>
-                            <span>nikhilkurmi386@gmail.com</span>
-                        </a>
-                        <a href="tel:+35799941917" class="flex items-center space-x-3 text-slate-700 hover:text-blue-600 transition">
-                            <i data-lucide="phone" class="w-5 h-5"></i>
-                            <span>+357 9994 1917</span>
-                        </a>
-                        <a href="https://nkurmi-cp.github.io/eu-cv" target="_blank" class="flex items-center space-x-3 text-slate-700 hover:text-blue-600 transition">
-                            <i data-lucide="globe" class="w-5 h-5"></i>
-                            <span>nkurmi-cp.github.io/eu-cv</span>
-                        </a>
-                    </div>
-                </div>
+    <!-- Skills Grid -->
+    <section id="skills" class="py-24 bg-black text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-4xl font-black mb-16 text-center text-white">SKILLSET</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center fade-in-up">
                 
-                <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-100">
-                    <h4 class="font-bold mb-6">Quick Message</h4>
-                    <form id="contactForm" class="space-y-4" onsubmit="event.preventDefault(); alert('Message sent successfully!');">
-                        <input type="text" placeholder="Your Name" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition" required>
-                        <input type="email" placeholder="Email Address" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition" required>
-                        <textarea placeholder="Tell me about your project..." rows="4" class="w-full px-4 py-3 bg-slate-50 border border-slate-100 rounded-xl focus:ring-2 focus:ring-blue-500 outline-none transition" required></textarea>
-                        <button type="submit" class="w-full py-3 bg-blue-600 text-white font-bold rounded-xl shadow-lg hover:bg-blue-700 transition">Send Message</button>
-                    </form>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fas fa-tasks text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">Project Mgmt</h4>
                 </div>
-            </div>
-            
-            <div class="flex flex-col md:flex-row justify-between items-center pt-10 border-t border-slate-200 text-slate-400 text-sm">
-                <p>&copy; 2026 Nikhil Kurmi. Built with code & passion.</p>
-                <div class="flex space-x-6 mt-4 md:mt-0">
-                    <a href="#" class="hover:text-slate-600">Github</a>
-                    <a href="#" class="hover:text-slate-600">LinkedIn</a>
-                    <a href="#" class="hover:text-slate-600">Twitter</a>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fab fa-laravel text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">Laravel / PHP</h4>
                 </div>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fas fa-server text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">Server / VPS</h4>
+                </div>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fas fa-headset text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">Tech Support</h4>
+                </div>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fab fa-jira text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">Jira / Agile</h4>
+                </div>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fab fa-html5 text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">HTML / CSS</h4>
+                </div>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fas fa-database text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">MySQL</h4>
+                </div>
+                <div class="p-6 border border-gray-800 hover:border-white transition duration-500">
+                    <i class="fab fa-git text-4xl mb-4"></i>
+                    <h4 class="font-bold uppercase tracking-widest text-sm">Git</h4>
+                </div>
+
             </div>
         </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="text-4xl font-black mb-4">GET IN TOUCH</h2>
+                <p class="text-gray-600">Fill out the form below to send me a direct email.</p>
+            </div>
+
+            <div class="bg-gray-50 p-8 md:p-12 shadow-2xl fade-in-up border border-gray-100 relative">
+                <!-- Abstract Contact Illustration BG -->
+                <svg class="absolute top-0 right-0 opacity-10 pointer-events-none" width="200" height="200" viewBox="0 0 100 100">
+                    <path d="M10 10 L90 10 L50 50 Z" fill="black"/>
+                    <rect x="10" y="10" width="80" height="60" stroke="black" stroke-width="2" fill="none"/>
+                </svg>
+
+                <form id="contactForm" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2 text-gray-500">Full Name</label>
+                            <input type="text" id="name" required class="w-full bg-white border border-gray-300 p-4 font-light focus:border-black transition">
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold uppercase tracking-widest mb-2 text-gray-500">Email Address</label>
+                            <input type="email" id="email" required class="w-full bg-white border border-gray-300 p-4 font-light focus:border-black transition">
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest mb-2 text-gray-500">Mobile No (With Country Code)</label>
+                        <input type="text" id="mobile" placeholder="+357..." required class="w-full bg-white border border-gray-300 p-4 font-light focus:border-black transition">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-widest mb-2 text-gray-500">Message</label>
+                        <textarea id="message" rows="4" required class="w-full bg-white border border-gray-300 p-4 font-light focus:border-black transition"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-black text-white py-4 font-bold uppercase tracking-widest hover:bg-gray-800 transition duration-300 flex justify-center items-center gap-2 group">
+                        <span>Send Message</span>
+                        <i class="fas fa-paper-plane group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </form>
+                
+                <p class="mt-4 text-center text-xs text-gray-400">
+                    * This will open your default email client with the message pre-filled.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-200 py-8 text-center">
+        <p class="text-sm font-bold tracking-widest text-black">NIKHIL KURMI &copy; 2026</p>
+        <p class="text-xs text-gray-500 mt-2">Built with Precision & Minimalism.</p>
     </footer>
 
+    <!-- Logic Script -->
     <script>
-        // Initialize Lucide icons
-        lucide.createIcons();
-
-        // Smooth scroll for nav links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+        $(document).ready(function() {
+            // 1. Mobile Menu Toggle
+            $('#mobile-menu-btn').click(function() {
+                $('#mobile-menu').toggleClass('hidden');
             });
+
+            // 2. Contact Form Logic (Mailto Construction)
+            $('#contactForm').submit(function(e) {
+                e.preventDefault();
+
+                // Get values
+                const name = $('#name').val();
+                const email = $('#email').val();
+                const mobile = $('#mobile').val();
+                const message = $('#message').val();
+
+                // Validation (Basic)
+                if(!name || !email || !mobile || !message) {
+                    alert('Please fill in all fields.');
+                    return;
+                }
+
+                // Construct Email Body
+                const subject = `Portfolio Inquiry from ${name}`;
+                const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0AMobile: ${mobile}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+                
+                // Destination Email
+                const destination = "nikhilkurmi386@gmail.com";
+
+                // Open Mail Client
+                window.location.href = `mailto:${destination}?subject=${subject}&body=${body}`;
+            });
+
+            // 3. Scroll Animation
+            function checkFade() {
+                $('.fade-in-up').each(function() {
+                    const top_of_element = $(this).offset().top;
+                    const bottom_of_window = $(window).scrollTop() + $(window).height();
+                    
+                    if (bottom_of_window > top_of_element + 50) {
+                        $(this).addClass('visible');
+                    }
+                });
+            }
+            
+            $(window).scroll(checkFade);
+            checkFade(); // Trigger on load
         });
     </script>
 </body>
-</html>
+    </html>
